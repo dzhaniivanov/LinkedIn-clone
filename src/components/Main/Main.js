@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PostModal from '../PostModal/PostModal';
 
 const Main = (props) => {
     return (
@@ -64,25 +65,26 @@ const Main = (props) => {
                         </li>
                     </SocialCounts>
                     <SocialActions>
-                    <button>
-                        <img src="/images/like-icon.svg" alt="" />
-                        <span>Like</span>
-                    </button>
-                    <button>
-                        <img src="/images/comment-icon.svg" alt="" />
-                        <span>Comments</span>
-                    </button>
-                    <button>
-                        <img src="/images/share-icon.svg" alt="" />
-                        <span>Share</span>
-                    </button>
-                    <button>
-                        <img src="/images/send-icon.svg" alt="" />
-                        <span>Send</span>
-                    </button>
+                        <button>
+                            <img src="/images/like-icon.svg" alt="" />
+                            <span>Like</span>
+                        </button>
+                        <button>
+                            <img src="/images/comment-icon.svg" alt="" />
+                            <span>Comments</span>
+                        </button>
+                        <button>
+                            <img src="/images/share-icon.svg" alt="" />
+                            <span>Share</span>
+                        </button>
+                        <button>
+                            <img src="/images/send-icon.svg" alt="" />
+                            <span>Send</span>
+                        </button>
                     </SocialActions>
                 </Article>
             </div>
+            <PostModal />
         </Container>
     )
 
@@ -258,7 +260,7 @@ const SocialCounts = styled.ul`
     }
 `;
 
-const SocialActions=styled.div`
+const SocialActions = styled.div`
     align-items:center;
     display:flex;
     justify-content:flex-start;
