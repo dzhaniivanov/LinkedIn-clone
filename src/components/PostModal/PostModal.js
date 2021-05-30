@@ -6,7 +6,7 @@ const PostModal = (props) => {
     const [editorText, setEditorText] = useState("");
     const [shareImage, setShareImage] = useState("");
     const [videoLink, setVideoLink] = useState("");
-
+    const [assetArea, setAssetArea] = useState("");
 
     const handleChange = (e) => {
         const image = e.target.files[0];
@@ -16,10 +16,19 @@ const PostModal = (props) => {
             return;
         }
         setShareImage(image);
-    }
+    };
+
+    const switchAssetArea = (area) => {
+        setShareImage("");
+        setVideoLink("");
+        setAssetArea(area);
+    };
 
     const reset = (e) => {
-        setEditorText('')
+        setEditorText('');
+        setShareImage("");
+        setVideoLink("");
+        setAssetArea("");
         props.handleClick(e);
     };
 
@@ -48,41 +57,49 @@ const PostModal = (props) => {
                                     placeholder="What do you want to talk about?"
                                     autoFocus={true}
                                 />
-                                <UploadImage>
-                                    <input type="file"
-                                        accept='image/gif, image/jpeg, image/png'
-                                        name="image"
-                                        id='file'
-                                        style={{ display: 'none' }}
-                                        onChange={handleChange}
-                                    />
-                                    <p>
-                                        <label htmlFor="file">Select an image to share</label>
-                                    </p>
-                                    {shareImage && <img src={URL.createObjectURL(shareImage)} />}
-                                    <>
-                                        <input type="text"
-                                            placeholder='Please input a video link'
-                                            value={videoLink}
-                                            onChange={(e) => setVideoLink(e.target.value)}
-                                        />
-                                        {videoLink && (<ReactPlayer width={"100%"} url={videoLink} />)}
-                                    </>
-                                </UploadImage>
+                                {
+                                    assetArea === 'image' ? (
+                                        <UploadImage>
+                                            <input type="file"
+                                                accept='image/gif, image/jpeg, image/png'
+                                                name="image"
+                                                id='file'
+                                                style={{ display: 'none' }}
+                                                onChange={handleChange}
+                                            />
+                                            <p>
+                                                <label htmlFor="file">Select an image to share</label>
+                                            </p>
+                                            {shareImage && (<img src={URL.createObjectURL(shareImage)} />
+                                            )}
+                                        </UploadImage>
+                                    ) : (
+                                        assetArea === "media" && (
+                                            <>
+                                                <input type="text"
+                                                    placeholder='Please input a video link'
+                                                    value={videoLink}
+                                                    onChange={(e) => setVideoLink(e.target.value)}
+                                                />
+                                                {videoLink && (<ReactPlayer width={"100%"} url={videoLink} />
+                                                )}
+                                            </>
+                                        )
+                                    )}
                             </Editor>
                         </SharedContent>
                         <ShareCreation>
                             <AttachAssets>
-                                <AssetButton>
+                                <AssetButton onClick={() => switchAssetArea('image')}>
                                     <img src="/images/share.svg" alt="" />
                                 </AssetButton>
-                                <AssetButton>
+                                <AssetButton onClick={() => switchAssetArea('media')}>
                                     <img src="/images/video.svg" alt="" />
-                                </AssetButton>
+                                </AssetButton >
                             </AttachAssets>
 
                             <ShareComment>
-                                <AssetButton>
+                                <AssetButton onClick={() => switchAssetArea('media')}>
                                     <img src="/images/share-comment.svg" alt="" />
                         Anyone
                     </AssetButton>
