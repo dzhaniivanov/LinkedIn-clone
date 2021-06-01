@@ -3,14 +3,14 @@ import { SET_USER, SET_LOADING_STATUS } from './actionType';
 import db from '../firebase';
 
 export const setUser = (payload) => ({
-    type: 'SET_USER',
+    type: SET_USER,
     user: payload,
 });
 
 export const setLoading = (status) => ({
     type: SET_LOADING_STATUS,
     status: status,
-})
+});
 
 
 export function signInAPI() {
@@ -78,7 +78,8 @@ export function postArticleAPI(payload) {
                         sharedImg: downloadURL,
                         comments: 0,
                         description: payload.description,
-                    })
+                    });
+                    dispatch(setLoading(false));
                 }
             );
         } else if (payload.video) {
@@ -94,7 +95,6 @@ export function postArticleAPI(payload) {
                 comments: 0,
                 description: payload.description,
             });
-            dispatch(setLoading(false));
         }
     };
 }

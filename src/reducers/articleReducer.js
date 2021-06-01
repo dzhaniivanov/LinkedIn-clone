@@ -6,7 +6,7 @@ export const initState = {
 
 const articleReducer = (state = initState, action) => {
     switch (action.type) {
-        case 'SET_LOADING_STATUS':
+        case SET_LOADING_STATUS:
             return {
                 ...state,
                 loading: action.status,

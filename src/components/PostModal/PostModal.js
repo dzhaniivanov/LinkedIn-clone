@@ -31,7 +31,6 @@ const PostModal = (props) => {
     };
 
     const postArticle = (e) => {
-        console.log('dsdssdk');
         e.preventDefault();
         if (e.target !== e.currentTarget) {
             return;
